@@ -3,6 +3,12 @@ plugins {
 }
 
 configurations {
+    coreJava {
+        canBeResolved = true
+    }
+    coreResources {
+        canBeResolved = true
+    }
     commonJava{
         canBeResolved = true
     }
@@ -12,33 +18,37 @@ configurations {
 }
 
 dependencies {
+    compileOnly(project(':core'))
     compileOnly(project(':common')) {
         capabilities {
             requireCapability "$group:$mod_id"
         }
     }
+
+    coreJava project(path: ':core', configuration: 'coreJava')
+    coreResources project(path: ':core', configuration: 'coreResources')
     commonJava project(path: ':common', configuration: 'commonJava')
     commonResources project(path: ':common', configuration: 'commonResources')
 }
 
 tasks.named('compileJava', JavaCompile) {
-    dependsOn(configurations.commonJava)
-    source(configurations.commonJava)
+    dependsOn(configurations.coreJava, configurations.commonJava)
+    source(configurations.coreJava, configurations.commonJava)
 }
 
 processResources {
-    dependsOn(configurations.commonResources)
-    from(configurations.commonResources)
+    dependsOn(configurations.coreResources, configurations.commonResources)
+    from(configurations.coreResources, configurations.commonResources)
 }
 
 tasks.named('javadoc', Javadoc).configure {
-    dependsOn(configurations.commonJava)
-    source(configurations.commonJava)
+    dependsOn(configurations.coreJava, configurations.commonJava)
+    source(configurations.coreJava, configurations.commonJava)
 }
 
 tasks.named('sourcesJar', Jar) {
-    dependsOn(configurations.commonJava)
-    from(configurations.commonJava)
-    dependsOn(configurations.commonResources)
-    from(configurations.commonResources)
+    dependsOn(configurations.coreJava, configurations.commonJava)
+    from(configurations.coreJava, configurations.commonJava)
+    dependsOn(configurations.coreResources, configurations.commonResources)
+    from(configurations.coreResources, configurations.commonResources)
 }

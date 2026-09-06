@@ -3,6 +3,26 @@ plugins {
     id 'net.neoforged.moddev'
 }
 
+configurations {
+    coreJava {
+        canBeResolved = true
+        canBeConsumed = false
+    }
+    coreResources {
+        canBeResolved = true
+        canBeConsumed = false
+    }
+    commonJava {
+        canBeResolved = false
+        canBeConsumed = true
+    }
+    commonResources {
+        canBeResolved = false
+        canBeConsumed = true
+    }
+}
+
+
 neoForge {
     neoFormVersion = neo_form_version
     // Automatically enable AccessTransformers if the file exists
@@ -21,17 +41,20 @@ dependencies {
     // fabric and neoforge both bundle mixinextras, so it is safe to use it in common
     compileOnly group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.3.5'
     annotationProcessor group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.3.5'
+
+    compileOnly project(':core')
+    coreJava project(path: ':core', configuration: 'coreJava')
+    coreResources project(path: ':core', configuration: 'coreResources')
 }
 
-configurations {
-    commonJava {
-        canBeResolved = false
-        canBeConsumed = true
-    }
-    commonResources {
-        canBeResolved = false
-        canBeConsumed = true
-    }
+tasks.named('compileJava', JavaCompile) {
+    dependsOn(configurations.coreJava)
+    source(configurations.coreJava)
+}
+
+processResources {
+    dependsOn(configurations.coreResources)
+    from(configurations.coreResources)
 }
 
 artifacts {
