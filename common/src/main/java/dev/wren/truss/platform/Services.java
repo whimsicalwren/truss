@@ -1,13 +1,13 @@
 package dev.wren.truss.platform;
 
 import dev.wren.truss.TrussCommon;
-import dev.wren.truss.platform.services.Platform;
+import dev.wren.truss.platform.services.PlatformHelper;
 
 import java.util.ServiceLoader;
 
 public class Services {
 
-    public static final Platform PLATFORM = load(Platform.class);
+    public static final PlatformHelper PLATFORM = load(PlatformHelper.class);
 
     public static <T> T load(Class<T> clazz) {
 

@@ -11,6 +11,6 @@ public class TrussCommon {
     public static final Logger LOGGER = LogManager.getLogger("truss");
 
     public static void init() {
-        LOGGER.info("common init for {} on {}", NAME, Services.PLATFORM.getName());
+        LOGGER.info("common init for {} on {}", NAME, Services.PLATFORM.getPlatform());
     }
 }
