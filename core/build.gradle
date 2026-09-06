@@ -17,6 +17,14 @@ configurations {
     }
 }
 
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("org.apache.logging.log4j:log4j-api:${mc_log4j2_version}")
+}
+
 artifacts {
     coreJava sourceSets.main.java.sourceDirectories.singleFile
     coreResources sourceSets.main.resources.sourceDirectories.singleFile

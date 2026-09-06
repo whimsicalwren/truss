@@ -6,7 +6,6 @@ import net.minecraftforge.fml.common.Mod;
 public class TrussForge {
 
     public TrussForge() {
-        TrussCommon.LOGGER.info("Hello Forge world!");
         TrussCommon.init();
     }
 }

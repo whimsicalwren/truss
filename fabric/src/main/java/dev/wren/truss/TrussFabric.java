@@ -6,7 +6,6 @@ public class TrussFabric implements ModInitializer {
     
     @Override
     public void onInitialize() {
-        TrussCommon.LOGGER.info("fabric init");
         TrussCommon.init();
     }
 }

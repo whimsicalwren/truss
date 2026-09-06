@@ -7,8 +7,6 @@ import net.neoforged.fml.common.Mod;
 public class TrussNeoForge {
 
     public TrussNeoForge(IEventBus eventBus) {
-        TrussCommon.LOGGER.info("Hello NeoForge world!");
         TrussCommon.init();
-
     }
 }
