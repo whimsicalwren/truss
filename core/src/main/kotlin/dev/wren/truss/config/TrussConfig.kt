@@ -1,5 +1,6 @@
 package dev.wren.truss.config
 
+
 object TrussConfig {
 
     @JvmField

@@ -1,7 +1,7 @@
 package dev.wren.truss
 
 import dev.wren.truss.platform.PLATFORM
-import net.minecraftforge.fml.config.ModConfig
+
 
 object TrussCommon {
 

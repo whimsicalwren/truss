@@ -11,10 +11,10 @@ import java.util.EnumMap
 object ConfigUpdater {
 
     @JvmStatic
-    val forgeConfigValuesMap: HashMap<String, ModConfigSpec.ConfigValue<*>> = HashMap()
+    val configValuesMap: HashMap<String, ModConfigSpec.ConfigValue<*>> = HashMap()
 
     private val configValueConsumer = { name: String, value: ModConfigSpec.ConfigValue<*> ->
-        forgeConfigValuesMap[name] = value
+        configValuesMap[name] = value
     }
 
     @JvmStatic
@@ -41,27 +41,34 @@ object ConfigUpdater {
     private val clientConfig = buildConfigModel(TrussConfig.CLIENT)
 
 
-    val SERVER_SPEC: ModConfigSpec = buildForgeConfigSpec(
+    val SERVER_SPEC: ModConfigSpec = buildConfigSpec(
         configCategory = serverConfig.root,
         builder = ModConfigSpec.Builder(),
         forgeConfigValueConsumer = configValueConsumer,
         pathAwareConsumer = pathAwareConsumerFor(ConfigType.SERVER),
     ).build()
 
-    val COMMON_SPEC: ModConfigSpec = buildForgeConfigSpec(
+    val COMMON_SPEC: ModConfigSpec = buildConfigSpec(
         configCategory = commonConfig.root,
         builder = ModConfigSpec.Builder(),
         forgeConfigValueConsumer = configValueConsumer,
         pathAwareConsumer = pathAwareConsumerFor(ConfigType.COMMON),
     ).build()
 
-    val CLIENT_SPEC: ModConfigSpec = buildForgeConfigSpec(
+    val CLIENT_SPEC: ModConfigSpec = buildConfigSpec(
         configCategory = clientConfig.root,
         builder = ModConfigSpec.Builder(),
         forgeConfigValueConsumer = configValueConsumer,
         pathAwareConsumer = pathAwareConsumerFor(ConfigType.CLIENT),
     ).build()
 
+    /**
+     * Update all configs.
+     * [CommentedConfig] is used here because neoforge's config events (as well as FCAP's fabric config events)
+     * have a config field of type [net.neoforged.fml.config.ModConfig], while forge's are of type [net.minecraftforge.fml.config.ModConfig].
+     * Because of this, we cannot use the same method for obvious reasons. However, we only need the configData field,
+     * which in all places is [CommentedConfig], thus why we use it here.
+     */
     fun update(config: CommentedConfig) {
         serverConfig.update(config)
         commonConfig.update(config)
@@ -74,7 +81,7 @@ object ConfigUpdater {
         ConfigModel.build(annotatedConfigObject)
 
     @JvmStatic
-    fun buildForgeConfigSpec(
+    fun buildConfigSpec(
         configCategory: ConfigModelCategory,
         builder: ModConfigSpec.Builder,
         forgeConfigValueConsumer: (String, ModConfigSpec.ConfigValue<*>) -> Unit = { a, b -> },
@@ -84,7 +91,7 @@ object ConfigUpdater {
         for ((_, node) in configCategory.children) {
             if (node is ConfigModelCategory) {
                 builder.push(node.title)
-                buildForgeConfigSpec(node, builder, forgeConfigValueConsumer, path + node.title, pathAwareConsumer)
+                buildConfigSpec(node, builder, forgeConfigValueConsumer, path + node.title, pathAwareConsumer)
                 builder.pop()
             } else if (node is ConfigModelEntry<*>) {
                 val value = defineNode(builder, node)

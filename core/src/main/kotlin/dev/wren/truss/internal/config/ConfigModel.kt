@@ -1,13 +1,11 @@
 package dev.wren.truss.internal.config
 
 import com.electronwill.nightconfig.core.CommentedConfig
-
 import java.lang.reflect.Field
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.javaField
 
 data class ConfigModel(val root: ConfigModelCategory) {
-
 
     fun update(config: CommentedConfig) {
         root.forEach { category, node ->
@@ -20,7 +18,6 @@ data class ConfigModel(val root: ConfigModelCategory) {
                         defaultValue is Enum<*> -> {
                             when (newValue) {
                                 is String -> {
-                                    // Convert string name to enum instance
                                     @Suppress("UNCHECKED_CAST")
                                     val enumConstants = defaultValue.declaringJavaClass.enumConstants as Array<Enum<*>>
                                     enumConstants.find { it.name == newValue }
@@ -45,8 +42,7 @@ data class ConfigModel(val root: ConfigModelCategory) {
     }
 
     companion object {
-        fun build(root: Any) =
-            ConfigModel(buildConfigTree(root, "root"))
+        fun build(root: Any) = ConfigModel(buildConfigTree(root, "root"))
 
         private fun buildConfigTree(obj: Any, title: String): ConfigModelCategory {
             val root = ConfigModelCategory(title)
@@ -54,7 +50,6 @@ data class ConfigModel(val root: ConfigModelCategory) {
             for (member in obj::class.memberProperties) {
                 val field = member.javaField ?: continue
                 field.isAccessible = true
-
 
                 val category = getCategory(field, obj)
                 if (category != null) {
@@ -72,11 +67,8 @@ data class ConfigModel(val root: ConfigModelCategory) {
             return root
         }
 
-        private fun getEntry(
-            field: Field,
-            name: String,
-            obj: Any,
-        ) = field.getAnnotation(ConfigEntry::class.java)?.let { annotation ->
+        private fun getEntry(field: Field, name: String, obj: Any) =
+            field.getAnnotation(ConfigEntry::class.java)?.let { annotation ->
             ConfigModelEntry.build(
                 getValue = { field.get(obj) as Any },
                 setValue = { v: Any -> field.set(obj, v) },
@@ -87,10 +79,8 @@ data class ConfigModel(val root: ConfigModelCategory) {
             )
         }
 
-        private fun getCategory(
-            field: Field,
-            obj: Any,
-        ) = field.getAnnotation(ConfigCategory::class.java)?.let { annotation ->
+        private fun getCategory(field: Field, obj: Any) =
+            field.getAnnotation(ConfigCategory::class.java)?.let { annotation ->
             buildConfigTree(field.get(obj), annotation.title)
         }
     }

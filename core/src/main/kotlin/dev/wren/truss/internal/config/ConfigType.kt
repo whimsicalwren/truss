@@ -1,7 +1,8 @@
 package dev.wren.truss.internal.config
 
+
 enum class ConfigType {
-    CLIENT,
+    SERVER,
     COMMON,
-    SERVER
+    CLIENT
 }

@@ -20,7 +20,6 @@ class TrussForge(modBus: IEventBus) {
     }
 
     // region event listeners
-
     private fun onConfigLoad(event: ModConfigEvent.Loading) {
         if (event.config.modId == ID) {
             ConfigUpdater.update(event.config.configData)

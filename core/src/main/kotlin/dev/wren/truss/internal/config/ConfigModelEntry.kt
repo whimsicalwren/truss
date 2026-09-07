@@ -1,5 +1,6 @@
 package dev.wren.truss.internal.config
 
+
 data class ConfigModelEntry<T>(
     val getValue: () -> T,
     val setValue: (T) -> Unit,
@@ -12,7 +13,6 @@ data class ConfigModelEntry<T>(
     val default = getValue()
 
     companion object {
-
         fun <T> build(
             getValue: () -> T,
             setValue: (T) -> Unit,
