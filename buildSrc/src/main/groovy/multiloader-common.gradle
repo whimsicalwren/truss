@@ -1,5 +1,5 @@
 plugins {
-    id 'java-library'
+    id 'multiloader-core'
     id 'maven-publish'
 }
 
@@ -8,7 +8,6 @@ base {
 }
 
 java {
-    toolchain.languageVersion = JavaLanguageVersion.of(java_version)
     withSourcesJar()
     withJavadocJar()
 }
@@ -97,9 +96,8 @@ processResources {
             'fabric_loader_version'        : fabric_loader_version,
             'description'                  : project.description,
             'neoforge_version'             : neoforge_version,
-            'neoforge_loader_version_range': neoforge_loader_version_range,
             'forge_version'                : forge_version,
-            'forge_loader_version_range'   : forge_loader_version_range
+            'kff_version_range': kff_version_range
     ]
 
     filesMatching(['pack.mcmeta', 'fabric.mod.json', 'META-INF/mods.toml', 'META-INF/neoforge.mods.toml', '*.mixins.json']) {

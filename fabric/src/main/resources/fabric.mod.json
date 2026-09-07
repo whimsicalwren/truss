@@ -15,7 +15,10 @@
     "environment": "*",
     "entrypoints": {
         "main": [
-          "dev.wren.truss.TrussFabric"
+            {
+                "adapter": "kotlin",
+                "value": "dev.wren.truss.TrussFabric"
+            }
         ]
     },
     "mixins": [
@@ -23,6 +26,7 @@
         "${mod_id}.fabric.mixins.json"
     ],
     "depends": {
+        "fabric-language-kotlin": ">=1.13.13+kotlin.2.4.10",
         "fabricloader": ">=${fabric_loader_version}",
         "fabric-api": "*",
         "minecraft": "${minecraft_version}",

@@ -1,6 +1,7 @@
 plugins {
     id 'multiloader-common'
     id 'net.neoforged.moddev'
+    id "org.jetbrains.kotlin.kapt"
 }
 
 configurations {
@@ -43,6 +44,7 @@ dependencies {
     compileOnly project(':core')
     coreJava project(path: ':core', configuration: 'coreJava')
     coreResources project(path: ':core', configuration: 'coreResources')
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
 }
 
 tasks.named('compileJava', JavaCompile) {
@@ -58,5 +60,8 @@ processResources {
 artifacts {
     commonJava sourceSets.main.java.sourceDirectories.singleFile
     commonResources sourceSets.main.resources.sourceDirectories.singleFile
+}
+repositories {
+    mavenCentral()
 }
 

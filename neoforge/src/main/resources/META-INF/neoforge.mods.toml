@@ -1,5 +1,5 @@
-modLoader = "javafml"
-loaderVersion = "${neoforge_loader_version_range}"
+modLoader = "kotlinforforge"
+loaderVersion = "${kff_version_range}"
 license = "${license}"
 issueTrackerURL="${issue_tracker}"
 

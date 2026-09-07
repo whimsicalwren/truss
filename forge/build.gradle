@@ -2,6 +2,7 @@ plugins {
     id 'multiloader-loader'
     id 'net.minecraftforge.gradle' version '[6.0.24,6.2)'
     id 'org.spongepowered.mixin' version '0.7-SNAPSHOT'
+    id "org.jetbrains.kotlin.kapt"
 }
 base {
     archivesName = "${mod_name}-forge-${minecraft_version}"
@@ -66,11 +67,17 @@ minecraft {
 
 sourceSets.main.resources.srcDir 'src/generated/resources'
 
+repositories {
+    maven { url = 'https://thedarkcolour.github.io/KotlinForForge/' }
+}
+
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    implementation("thedarkcolour:kotlinforforge:${kff_version}")
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
 
     implementation('net.sf.jopt-simple:jopt-simple:5.0.4') { version { strictly '5.0.4' } }
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
 }
 
 publishing {

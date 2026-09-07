@@ -38,3 +38,11 @@ neoForge {
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+repositories {
+    maven { url = 'https://thedarkcolour.github.io/KotlinForForge/' }
+}
+
+dependencies {
+    implementation("thedarkcolour:kotlinforforge:${kff_version}")
+}
