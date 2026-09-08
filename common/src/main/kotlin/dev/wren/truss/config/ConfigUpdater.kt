@@ -7,6 +7,7 @@ import dev.wren.truss.internal.config.ConfigModelEntry
 import dev.wren.truss.internal.config.ConfigType
 import net.neoforged.neoforge.common.ModConfigSpec
 import java.util.EnumMap
+import kotlin.collections.iterator
 
 object ConfigUpdater {
 

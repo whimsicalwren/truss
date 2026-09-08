@@ -6,10 +6,16 @@ configurations {
     coreJava {
         canBeResolved = true
     }
+    coreKotlin {
+        canBeResolved = true
+    }
     coreResources {
         canBeResolved = true
     }
     commonJava{
+        canBeResolved = true
+    }
+    commonKotlin {
         canBeResolved = true
     }
     commonResources{
@@ -26,14 +32,21 @@ dependencies {
     }
 
     coreJava project(path: ':core', configuration: 'coreJava')
+    coreKotlin project(path: ':core', configuration: 'coreKotlin')
     coreResources project(path: ':core', configuration: 'coreResources')
     commonJava project(path: ':common', configuration: 'commonJava')
+    commonKotlin project(path: ':common', configuration: 'commonKotlin')
     commonResources project(path: ':common', configuration: 'commonResources')
 }
 
 tasks.named('compileJava', JavaCompile) {
     dependsOn(configurations.coreJava, configurations.commonJava)
     source(configurations.coreJava, configurations.commonJava)
+}
+
+tasks.named('compileKotlin') {
+    dependsOn(configurations.coreKotlin, configurations.commonKotlin)
+    source(configurations.coreKotlin, configurations.commonKotlin)
 }
 
 processResources {

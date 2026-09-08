@@ -44,5 +44,6 @@ repositories {
 }
 
 dependencies {
-    implementation("thedarkcolour:kotlinforforge:${kff_version}")
+    implementation("thedarkcolour:kotlinforforge-neoforge:${kff_version}")
+    implementation("fuzs.forgeconfigapiport:forgeconfigapiport-neoforge:${fcap_version}")
 }

@@ -1,6 +1,7 @@
 plugins {
     id 'java-library'
     id 'org.jetbrains.kotlin.jvm'
+    id 'org.jetbrains.kotlin.plugin.serialization'
 }
 
 java {
@@ -10,17 +11,9 @@ java {
 repositories {
     mavenCentral()
     mavenLocal()
-    maven {
-        url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
-        content {
-            includeGroup("fuzs.forgeconfigapiport")
-        }
-    }
 }
 
 dependencies {
-    implementation("fuzs.forgeconfigapiport:forgeconfigapiport-common:${fcap_version}") { transitive = false }
-
     api("org.jetbrains.kotlin:kotlin-reflect")
     compileOnly("org.jetbrains:annotations:24.1.0")
 

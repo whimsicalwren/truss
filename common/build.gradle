@@ -1,11 +1,15 @@
 plugins {
     id 'multiloader-common'
     id 'net.neoforged.moddev'
-    id "org.jetbrains.kotlin.kapt"
+    id 'org.jetbrains.kotlin.kapt'
 }
 
 configurations {
     coreJava {
+        canBeResolved = true
+        canBeConsumed = false
+    }
+    coreKotlin {
         canBeResolved = true
         canBeConsumed = false
     }
@@ -14,6 +18,10 @@ configurations {
         canBeConsumed = false
     }
     commonJava {
+        canBeResolved = false
+        canBeConsumed = true
+    }
+    commonKotlin {
         canBeResolved = false
         canBeConsumed = true
     }
@@ -43,6 +51,7 @@ dependencies {
 
     compileOnly project(':core')
     coreJava project(path: ':core', configuration: 'coreJava')
+    coreKotlin project(path: ':core', configuration: 'coreKotlin')
     coreResources project(path: ':core', configuration: 'coreResources')
     testImplementation 'org.jetbrains.kotlin:kotlin-test'
 }
@@ -52,16 +61,20 @@ tasks.named('compileJava', JavaCompile) {
     source(configurations.coreJava)
 }
 
+tasks.named('compileKotlin') {
+    dependsOn(configurations.coreKotlin)
+    source(configurations.coreKotlin)
+}
+
 processResources {
     dependsOn(configurations.coreResources)
     from(configurations.coreResources)
 }
 
 artifacts {
-    commonJava sourceSets.main.java.sourceDirectories.singleFile
-    commonResources sourceSets.main.resources.sourceDirectories.singleFile
+    commonJava sourceSets.main.java.sourceDirectories.files
+    commonKotlin sourceSets.main.kotlin.sourceDirectories.files
+    commonResources sourceSets.main.resources.sourceDirectories.files
 }
-repositories {
-    mavenCentral()
-}
+
 

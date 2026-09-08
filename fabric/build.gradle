@@ -4,14 +4,15 @@ plugins {
 }
 dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"
+    include(modImplementation("net.fabricmc:fabric-language-kotlin:${fabric_kotlin_version}"))
+
     mappings loom.layered {
         officialMojangMappings()
         parchment("org.parchmentmc.data:parchment-${parchment_minecraft}:${parchment_version}@zip")
     }
     modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
-    include(modImplementation("net.fabricmc:fabric-language-kotlin:${fabric_kotlin_version}"))
-    include(modImplementation "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${fcap_version}")
+    modImplementation("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${fcap_version}")
 }
 
 loom {

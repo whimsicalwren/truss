@@ -7,6 +7,10 @@ configurations {
         canBeResolved = false
         canBeConsumed = true
     }
+    coreKotlin {
+        canBeResolved = false
+        canBeConsumed = true
+    }
     coreResources {
         canBeResolved = false
         canBeConsumed = true
@@ -18,6 +22,7 @@ dependencies {
 }
 
 artifacts {
-    coreJava sourceSets.main.java.sourceDirectories.singleFile
-    coreResources sourceSets.main.resources.sourceDirectories.singleFile
+    coreJava sourceSets.main.java.sourceDirectories.files
+    coreKotlin sourceSets.main.kotlin.sourceDirectories.files
+    coreResources sourceSets.main.resources.sourceDirectories.files
 }
