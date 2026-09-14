@@ -11,13 +11,35 @@ java {
 repositories {
     mavenCentral()
     mavenLocal()
+    maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" }
 }
 
 dependencies {
+    implementation("fuzs.forgeconfigapiport:forgeconfigapiport-common-neoforgeapi:${fcap_version}") { transitive = false }
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinx_version}")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:${kotlinx_version}")
+    implementation("it.unimi.dsi:fastutil:${fastutil_version}")
+
     api("org.jetbrains.kotlin:kotlin-reflect")
     compileOnly("org.jetbrains:annotations:24.1.0")
 
-    implementation('com.electronwill.night-config:core:3.8.0')
-    implementation('com.electronwill.night-config:toml:3.8.0')
-    implementation('com.electronwill.night-config:json:3.8.0')
+    implementation("com.electronwill.night-config:core:${nightconfig_version}")
+    implementation("com.electronwill.night-config:toml:${nightconfig_version}")
+    implementation("com.electronwill.night-config:json:${nightconfig_version}")
+    implementation("com.electronwill.night-config:yaml:${nightconfig_version}")
+
+    implementation("com.google.code.gson:gson:2.10.1")
+
+    implementation("net.dv8tion:JDA:${jda_version}") {
+        exclude module: "opus-java"
+        exclude module: "tink"
+        exclude module: "slf4j-api"
+        exclude module: "okhttp"
+    }
+    implementation("club.minnced:jda-ktx:${jda_ktx_version}") {
+        exclude module: "opus-java"
+        exclude module: "tink"
+        exclude module: "slf4j-api"
+        exclude module: "okhttp"
+    }
 }

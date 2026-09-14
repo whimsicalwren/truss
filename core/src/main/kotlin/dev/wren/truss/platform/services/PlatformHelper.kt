@@ -12,7 +12,6 @@ interface PlatformHelper {
     val platform: Platform
 
     enum class Platform {
-        FORGE,
         FABRIC,
         NEOFORGE
     }

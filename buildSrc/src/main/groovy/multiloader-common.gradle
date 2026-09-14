@@ -40,11 +40,6 @@ repositories {
         name = 'BlameJared'
         url = 'https://maven.blamejared.com'
     }
-    maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" }
-}
-
-dependencies {
-    implementation("fuzs.forgeconfigapiport:forgeconfigapiport-common-neoforgeapi:${fcap_version}") { transitive = false }
 }
 
 ['apiElements', 'runtimeElements', 'sourcesElements', 'javadocElements'].each { variant ->

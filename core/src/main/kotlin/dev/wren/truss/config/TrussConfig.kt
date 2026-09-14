@@ -1,35 +1,44 @@
 package dev.wren.truss.config
 
+import dev.wren.truss.internal.config.ConfigCategory
 import dev.wren.truss.internal.config.ConfigEntry
 
 
 object TrussConfig {
 
     @JvmField
-    val CLIENT = Client()
+    val client = ClientConfig()
 
     @JvmField
-    val COMMON = Common()
+    val common = CommonConfig()
 
     @JvmField
-    val SERVER = Server()
+    val server = ServerConfig()
 
-    class Client {
+    class ClientConfig {
         @ConfigEntry
-        val showEmojis = true
-
-        @ConfigEntry
-        val showMarkdown = true
+        var showEmojis = true
 
         @ConfigEntry
-        val showMarkdownWhileTyping = true
+        var showMarkdown = true
+
+        @ConfigEntry
+        var showMarkdownWhileTyping = true
     }
 
-    class Common {
+    class CommonConfig {
 
     }
 
-    class Server {
+    class ServerConfig {
+        @ConfigCategory(title = "Core Config")
+        val core = CoreServerConfig()
 
+        class CoreServerConfig {
+            @ConfigEntry(
+                description = "The token of the bot. See https://jda.wiki/using-jda/getting-started/#creating-a-discord-bot for how to create a bot and get the token."
+            )
+            var token = ""
+        }
     }
 }

@@ -7,5 +7,5 @@ class NeoForgePlatformHelper : PlatformHelper {
     override val isClient: Boolean = FMLLoader.getDist().isClient
     override val isDedicatedServer: Boolean = FMLLoader.getDist().isDedicatedServer
     override val dist: String = FMLLoader.getDist().name
-    override val platform: PlatformHelper.Platform = PlatformHelper.Platform.FORGE
+    override val platform: PlatformHelper.Platform = PlatformHelper.Platform.NEOFORGE
 }

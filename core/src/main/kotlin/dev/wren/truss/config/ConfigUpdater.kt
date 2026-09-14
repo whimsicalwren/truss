@@ -37,9 +37,9 @@ object ConfigUpdater {
         return category.replace(" ", "").filter { it.isLetterOrDigit() || it == '.' }
     }
 
-    private val serverConfig = buildConfigModel(TrussConfig.SERVER)
-    private val commonConfig = buildConfigModel(TrussConfig.COMMON)
-    private val clientConfig = buildConfigModel(TrussConfig.CLIENT)
+    private val serverConfig = buildConfigModel(TrussConfig.server)
+    private val commonConfig = buildConfigModel(TrussConfig.common)
+    private val clientConfig = buildConfigModel(TrussConfig.client)
 
 
     val SERVER_SPEC: ModConfigSpec = buildConfigSpec(
@@ -65,10 +65,6 @@ object ConfigUpdater {
 
     /**
      * Update all configs.
-     * [CommentedConfig] is used here because neoforge's config events (as well as FCAP's fabric config events)
-     * have a config field of type [net.neoforged.fml.config.ModConfig], while forge's are of type [net.minecraftforge.fml.config.ModConfig].
-     * Because of this, we cannot use the same method for obvious reasons. However, we only need the configData field,
-     * which in all places is [CommentedConfig], thus why we use it here.
      */
     fun update(config: CommentedConfig) {
         serverConfig.update(config)

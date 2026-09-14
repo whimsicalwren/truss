@@ -1,7 +1,7 @@
 package dev.wren.truss
 
-import dev.wren.truss.TrussCommon.ID
 import dev.wren.truss.config.ConfigUpdater
+import dev.wren.truss.util.trussConfig
 import net.neoforged.fml.ModContainer
 import net.neoforged.fml.common.Mod
 import net.neoforged.fml.config.ModConfig
@@ -17,11 +17,12 @@ class TrussNeoForge(container: ModContainer) {
         modBus.addListener(::onConfigLoad)
         modBus.addListener(::onConfigReload)
 
-        container.registerConfig(ModConfig.Type.CLIENT, ConfigUpdater.CLIENT_SPEC)
-        container.registerConfig(ModConfig.Type.COMMON, ConfigUpdater.COMMON_SPEC)
-        container.registerConfig(ModConfig.Type.SERVER, ConfigUpdater.SERVER_SPEC)
+        container.trussConfig(ModConfig.Type.CLIENT, ConfigUpdater.CLIENT_SPEC)
+        container.trussConfig(ModConfig.Type.COMMON, ConfigUpdater.COMMON_SPEC)
+        container.trussConfig(ModConfig.Type.SERVER, ConfigUpdater.SERVER_SPEC)
 
         TrussCommon.init()
+        LOGGER.info("neoforge init for {} ({})", NAME, ID)
     }
 
     // region event listeners
