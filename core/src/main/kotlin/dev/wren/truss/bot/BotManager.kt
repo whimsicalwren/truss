@@ -60,13 +60,13 @@ object BotManager {
                 LOGGER.infoKey("discord.ready")
             } catch (e: CancellationException) {
                 readyWarningJob.cancel()
-                LOGGER.errorKey("discord.init_interrupted", e = e)
+                LOGGER.errorKey("discord.init_interrupted", e)
                 throw e
             } catch (e: Exception) {
                 readyWarningJob.cancel()
                 eventExecutor.shutdownNow()
                 callbackExecutor.shutdownNow()
-                LOGGER.errorKey("discord.init_interrupted", e = e)
+                LOGGER.errorKey("discord.init_interrupted", e)
             }
 
             if (bot.status != JDA.Status.CONNECTED) {
@@ -95,7 +95,7 @@ object BotManager {
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
-                LOGGER.errorKey("discord.commands_failed", e = e)
+                LOGGER.errorKey("discord.commands_failed", e)
                 false
             }
         }

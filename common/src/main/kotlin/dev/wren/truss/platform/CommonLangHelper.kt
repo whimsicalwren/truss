@@ -8,4 +8,7 @@ class CommonLangHelper : LangHelper {
         return Component.translatable(key, args).string
     }
 
+    override fun translate(key: String): String {
+        return Component.translatable(key).string
+    }
 }

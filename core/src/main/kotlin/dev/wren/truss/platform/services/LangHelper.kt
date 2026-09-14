@@ -5,11 +5,14 @@ package dev.wren.truss.platform.services
  */
 interface LangHelper {
     fun translate(key: String, vararg args: Any): String
+    fun translate(key: String): String
 
     fun createPrefix(prefix: String): PrefixedLangHelper = PrefixedLangHelper(prefix, this)
 
     class PrefixedLangHelper(val prefix: String, val parent: LangHelper) : LangHelper {
         override fun translate(key: String, vararg args: Any): String =
             parent.translate("$prefix.$key", args)
+
+        override fun translate(key: String): String = parent.translate("$prefix.$key")
     }
 }

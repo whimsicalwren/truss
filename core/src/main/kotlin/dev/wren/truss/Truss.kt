@@ -7,11 +7,13 @@ import org.apache.logging.log4j.Logger
 
 object Truss {
     fun init() {
-        LOGGER.info("services:")
-        LOGGER.info("lang: ${LANG.javaClass}")
-        LOGGER.info("platform: ${PLATFORM.javaClass}")
+        LOGGER.info(
+            "\n\tServices:" +
+                    "\n\t\tLang: ${LANG.javaClass}" +
+                    "\n\t\tPlatform: ${PLATFORM.javaClass}"
+        )
 
-        LOGGER.info("core init for {} ({})", NAME, ID)
+        LOGGER.info("core init")
     }
 }
 
