@@ -1,7 +1,6 @@
 package dev.wren.truss.commands
 
 import com.mojang.brigadier.builder.ArgumentBuilder
-import dev.wren.truss.platform.CommonLangHelper
 import dev.wren.truss.platform.LANG
 import dev.wren.truss.platform.PLATFORM
 import net.minecraft.commands.CommandSourceStack

@@ -39,3 +39,10 @@ fun Logger.errorKey(key: String, vararg args: Any) {
     error(LANG.translate(key, args))
 }
 // endregion
+
+inline fun <T> T.applyIf(condition: Boolean, applyFunc: (T) -> T): T {
+    if (condition) {
+        applyFunc.invoke(this)
+    }
+    return this
+}

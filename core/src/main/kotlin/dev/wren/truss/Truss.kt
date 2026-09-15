@@ -1,6 +1,7 @@
 package dev.wren.truss
 
 import dev.wren.truss.platform.LANG
+import dev.wren.truss.platform.MESSAGE
 import dev.wren.truss.platform.PLATFORM
 import dev.wren.truss.util.logger
 import org.apache.logging.log4j.Logger
@@ -10,7 +11,8 @@ object Truss {
         LOGGER.info(
             "\n\tServices:" +
                     "\n\t\tLang: ${LANG.javaClass}" +
-                    "\n\t\tPlatform: ${PLATFORM.javaClass}"
+                    "\n\t\tPlatform: ${PLATFORM.javaClass}" +
+                    "\n\t\tMessage: ${MESSAGE.javaClass}"
         )
 
         LOGGER.info("core init")

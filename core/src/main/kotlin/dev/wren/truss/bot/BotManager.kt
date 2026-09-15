@@ -21,9 +21,10 @@ import kotlin.time.Duration.Companion.milliseconds
 object BotManager {
 
     lateinit var bot: JDA
+        private set
 
     suspend fun init(): Boolean {
-        val token = TrussConfig.server.core.token
+        val token = TrussConfig.server.token
         if (token.isBlank()) {
             LOGGER.errorKey("discord.no_token")
             return false

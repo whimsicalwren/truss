@@ -2,6 +2,7 @@ package dev.wren.truss
 
 import dev.wren.truss.config.ConfigUpdater
 import dev.wren.truss.util.trussConfig
+import net.minecraft.network.chat.OutgoingChatMessage
 import net.neoforged.bus.api.IEventBus
 import net.neoforged.fml.ModContainer
 import net.neoforged.fml.common.Mod

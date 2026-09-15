@@ -1,3 +1,5 @@
 {
-  "truss.test_lang": "Locale is en_us, lang is working"
+  "truss.test_lang": "Locale is en_us, lang is working",
+  "discord.message.from_discord": "Message sent from Discord",
+  "discord.message.id": "Message ID: %1$s"
 }
